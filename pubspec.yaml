@@ -1,10 +1,10 @@
 name: plexaverse_cli
-description: A powerful CLI tool for managing Flutter UI components. Easily add pre-built widgets like buttons, cards, and more to your Flutter projects.
-version: 0.1.0
-homepage: https://github.com/asangborkar/plexaverse_cli
-repository: https://github.com/asangborkar/plexaverse_cli
-issue_tracker: https://github.com/asangborkar/plexaverse_cli/issues
-documentation: https://github.com/asangborkar/plexaverse_cli#readme
+description: A powerful CLI tool for faster flutter application development. Easily add pre-built widgets and functional screens to your Flutter projects.
+version: 0.1.1
+homepage: https://github.com/plexaverse/plexaverse_cli
+repository: https://github.com/plexaverse/plexaverse_cli
+issue_tracker: https://github.com/plexaverse/plexaverse_cli/issues
+documentation: https://github.com/plexaverse/plexaverse_cli#readme
 environment:
   sdk: ">=3.3.0 <4.0.0"
 
