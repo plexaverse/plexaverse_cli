@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Plexaverse CLI Installation Script
+# Plexaverse CLI Installation Script (Keep Terminal Open Version)
 # This script installs Plexaverse CLI and sets up the PATH automatically
+# Use this version if you want to keep the terminal open after installation
 
 set -e
 
@@ -66,36 +67,8 @@ fi
 echo ""
 echo "🎉 Success! You can now use 'plexaverse' from anywhere."
 echo ""
-echo "⚠️  IMPORTANT: The current terminal session needs to be refreshed to use the CLI."
-echo "🔄 This terminal will close automatically in 3 seconds to apply the changes..."
+echo "⚠️  IMPORTANT: To use the CLI in this terminal session, run:"
+echo "   source $SHELL_CONFIG"
 echo ""
-
-# Countdown and close terminal
-for i in 3 2 1; do
-    echo "⏰ Closing terminal in $i seconds..."
-    sleep 1
-done
-
-echo "🚀 Closing terminal to apply PATH changes..."
-echo "💡 Open a new terminal and run 'plexaverse --help' to verify installation."
-
-# Close the terminal
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS
-    osascript -e 'tell application "Terminal" to close front window' 2>/dev/null || true
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Linux
-    if command -v gnome-terminal >/dev/null 2>&1; then
-        # GNOME Terminal
-        gnome-terminal --help >/dev/null 2>&1 && exit 0
-    elif command -v konsole >/dev/null 2>&1; then
-        # Konsole
-        konsole --help >/dev/null 2>&1 && exit 0
-    elif command -v xterm >/dev/null 2>&1; then
-        # xterm
-        xterm -help >/dev/null 2>&1 && exit 0
-    fi
-fi
-
-# Fallback: just exit
-exit 0
+echo "💡 Or simply open a new terminal window/tab."
+echo "🔄 The CLI will be available automatically in new terminal sessions."

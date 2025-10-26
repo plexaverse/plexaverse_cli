@@ -15,13 +15,24 @@ A powerful command-line tool for managing Flutter UI components. Easily add pre-
 ### Option 1: Automatic Installation (Recommended)
 
 ```bash
-# Download and run the installation script
+# Download and run the installation script (closes terminal automatically)
 curl -fsSL https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh | bash
 
 # Or download and run manually
 wget https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh
 chmod +x install.sh
 ./install.sh
+```
+
+**Alternative: Keep Terminal Open**
+```bash
+# Download and run the installation script (keeps terminal open)
+curl -fsSL https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install-keep-terminal.sh | bash
+
+# Or download and run manually
+wget https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install-keep-terminal.sh
+chmod +x install-keep-terminal.sh
+./install-keep-terminal.sh
 ```
 
 ### Option 2: Manual Installation from pub.dev
