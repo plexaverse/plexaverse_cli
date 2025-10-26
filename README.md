@@ -12,22 +12,68 @@ A powerful command-line tool for managing Flutter UI components. Easily add pre-
 
 ## 📦 Installation
 
-### Option 1: Install from pub.dev (Recommended)
+### Option 1: Automatic Installation (Recommended)
 
 ```bash
+# Download and run the installation script
+curl -fsSL https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh | bash
+
+# Or download and run manually
+wget https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh
+chmod +x install.sh
+./install.sh
+```
+
+### Option 2: Manual Installation from pub.dev
+
+```bash
+# Install the CLI globally
 dart pub global activate plexaverse_cli
+
+# Add to PATH (required for all users)
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# Make PATH change permanent by adding to your shell config file:
+# For zsh (macOS default): echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.zshrc
+# For bash: echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.bashrc
+# For fish: echo 'set -gx PATH $PATH $HOME/.pub-cache/bin' >> ~/.config/fish/config.fish
+
+# Verify installation
+plexaverse --help
 ```
 
-### Option 2: Install from GitHub
+### Option 3: Install from GitHub
 
 ```bash
-dart pub global activate --source git https://github.com/asangborkar/plexaverse_cli.git
+# Install from GitHub
+dart pub global activate --source git https://github.com/plexaverse/plexaverse_cli.git
+
+# Add to PATH (required)
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# Verify installation
+plexaverse --help
 ```
 
-### Option 3: Install from Local Path
+### Option 4: Install from Local Path
 
 ```bash
+# Install from local path
 dart pub global activate --source path /path/to/plexaverse_cli
+
+# Add to PATH (required)
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# Verify installation
+plexaverse --help
+```
+
+### Option 5: Direct Download (No PATH setup needed)
+
+```bash
+# Download executable from GitHub releases
+# Add to PATH or run directly
+./plexaverse --help
 ```
 
 ## 🛠️ Usage
@@ -132,6 +178,54 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Built with [Dart](https://dart.dev/)
 - Uses [args](https://pub.dev/packages/args) for command-line argument parsing
 - Inspired by modern CLI tools and Flutter best practices
+
+## 🔧 Troubleshooting
+
+### CLI Command Not Found
+
+If you get `command not found: plexaverse` after installation:
+
+1. **Check if the executable exists:**
+   ```bash
+   ls -la $HOME/.pub-cache/bin/plexaverse
+   ```
+
+2. **Check your PATH:**
+   ```bash
+   echo $PATH | grep pub-cache
+   ```
+
+3. **Add to PATH temporarily:**
+   ```bash
+   export PATH="$PATH":"$HOME/.pub-cache/bin"
+   ```
+
+4. **Add to PATH permanently:**
+   ```bash
+   # For zsh (macOS default)
+   echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.zshrc
+   source ~/.zshrc
+   
+   # For bash
+   echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.bashrc
+   source ~/.bashrc
+   
+   # For fish shell
+   echo 'set -gx PATH $PATH $HOME/.pub-cache/bin' >> ~/.config/fish/config.fish
+   ```
+
+5. **Verify installation:**
+   ```bash
+   which plexaverse
+   plexaverse --help
+   ```
+
+### Alternative: Use Full Path
+
+If PATH issues persist, you can always run the CLI using the full path:
+```bash
+$HOME/.pub-cache/bin/plexaverse --help
+```
 
 ## 📞 Support
 
