@@ -1,0 +1,41 @@
+# Files and directories created by pub
+.dart_tool/
+.packages
+build/
+# Remove the following pattern if you wish to check in your lock file
+pubspec.lock
+
+# Conventional directory for build outputs
+build/
+
+# Directory created by dartdoc
+# If you don't generate documentation locally you can remove this line.
+doc/api/
+
+# Avoid committing generated files
+*.g.dart
+*.freezed.dart
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled executables
+plexaverse
+plexaverse.exe
+plexaverse.bat
+
+# Test files
+test_flutter_project/
