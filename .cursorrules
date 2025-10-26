@@ -1,0 +1,254 @@
+# Plexaverse CLI - Cursor Rules
+
+## Project Overview
+Plexaverse CLI is a Dart-based command-line tool for managing Flutter UI components. It allows developers to easily add, list, and update pre-built Flutter widgets in their projects. The CLI follows a component registry pattern where reusable Flutter widgets are defined as templates and can be added to any Flutter project.
+
+## Architecture & Structure
+
+### Core Components
+- **Command Runner**: `bin/plexaverse.dart` - Main entry point using `args` package for CLI commands
+- **Commands**: Located in `lib/commands/` - Individual command implementations
+- **Core Services**: Located in `lib/core/` - Business logic and utilities
+- **Models**: Located in `lib/models/` - Data structures and type definitions
+
+### Command Structure
+The CLI implements four main commands:
+1. `init` - Initialize Plexaverse in a Flutter project (creates `plexaverse.json`)
+2. `add` - Add a component to the project with optional example and overwrite flags
+3. `list` - Display all available components from the registry
+4. `update` - Update components (currently stubbed for future implementation)
+
+### Component Registry System
+- Components are defined in `ComponentRegistry` class with templates, dependencies, and metadata
+- Each component has a `ComponentDescriptor` containing:
+  - Name, description, and category
+  - File paths where components will be created
+  - Dependencies (packages) required
+  - Template code for each file
+
+## Code Patterns & Conventions
+
+### Dart/Flutter Standards
+- Use `const` constructors where possible for performance
+- Follow Flutter widget naming conventions (Px prefix for Plexaverse components)
+- Use `super.key` in widget constructors
+- Implement proper error handling with try-catch blocks
+- Use `async/await` for asynchronous operations
+
+### CLI Command Pattern
+```dart
+class CommandName extends Command<int> {
+  @override
+  String get name => 'command-name';
+  
+  @override
+  String get description => 'Command description';
+  
+  @override
+  Future<int> run() async {
+    // Command implementation
+    return 0; // Success
+  }
+}
+```
+
+### Error Handling
+- Use `usageException()` for command usage errors
+- Return appropriate exit codes (0 for success, 1 for general errors, 64 for usage errors)
+- Write errors to `stderr` and normal output to `stdout`
+
+### File System Operations
+- Use `FileSystem.writeFile()` for safe file writing with overwrite protection
+- Use `FileSystem.ensureDir()` to create directories recursively
+- Always check file existence before operations
+
+## Dependencies & External Packages
+
+### Core Dependencies
+- `args: ^2.6.0` - Command-line argument parsing
+- `path: ^1.9.0` - Cross-platform path manipulation
+- `yaml: ^3.1.2` - YAML parsing for pubspec.yaml
+- `yaml_edit: ^2.2.0` - YAML editing capabilities
+- `http: ^1.2.2` - HTTP client for future remote component fetching
+
+### Development Dependencies
+- `lints: ^3.0.0` - Dart linting rules
+- `test: ^1.25.0` - Unit testing framework
+
+## Component Development Guidelines
+
+### Component Template Structure
+Components should follow this pattern:
+```dart
+import 'package:flutter/material.dart';
+
+class PxComponentName extends StatelessWidget {
+  // Required properties
+  final Widget child;
+  
+  // Optional properties with sensible defaults
+  final SomeType? optionalProperty;
+  
+  const PxComponentName({
+    super.key,
+    required this.child,
+    this.optionalProperty,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return // Flutter widget implementation
+  }
+}
+```
+
+### Component Categories
+- `interactive` - Components that respond to user input (buttons, inputs)
+- `display` - Components for showing content (cards, lists, layouts)
+
+### Naming Conventions
+- Component classes: `Px` prefix + PascalCase (e.g., `PxButton`, `PxCard`)
+- File names: snake_case with `px_` prefix (e.g., `px_button.dart`, `px_card.dart`)
+- Component registry keys: lowercase (e.g., `'button'`, `'card'`)
+
+## Project Configuration
+
+### plexaverse.json Structure
+```json
+{
+  "version": "0.1.0",
+  "directories": {
+    "components": "lib/widgets",
+    "examples": "lib/examples"
+  },
+  "theme": {
+    "material3": true
+  }
+}
+```
+
+### Flutter Project Detection
+The CLI validates Flutter projects by checking for `flutter` dependency in `pubspec.yaml`
+
+## Development Workflow
+
+### Adding New Components
+1. Define component template in `ComponentRegistry._components`
+2. Create `ComponentDescriptor` with:
+   - Template code as raw strings
+   - File paths relative to project root
+   - Any required dependencies
+   - Appropriate category and description
+3. Test with `plexaverse add <component-name>`
+
+### Testing
+- Use `test/` directory for unit tests
+- Test command functionality, file operations, and error handling
+- Ensure Flutter project detection works correctly
+
+### Building & Distribution
+- Executable name: `plexaverse`
+- Entry point: `bin/plexaverse.dart`
+- Use `dart pub global activate` for installation
+
+## File Organization
+
+### Directory Structure
+```
+lib/
+├── commands/          # CLI command implementations
+├── core/             # Business logic and utilities
+│   ├── component_registry.dart  # Component definitions and templates
+│   ├── file_system.dart         # File operations
+│   ├── project_analyzer.dart    # Flutter project detection
+│   └── pubspec_editor.dart      # Dependency management
+└── models/           # Data structures
+    └── component.dart # Component-related models
+```
+
+### Key Files
+- `bin/plexaverse.dart` - CLI entry point and command runner
+- `lib/core/component_registry.dart` - Central component registry with templates
+- `lib/commands/add_command.dart` - Component installation logic
+- `lib/core/pubspec_editor.dart` - Dependency management via pub commands
+
+## Future Considerations
+
+### Planned Features
+- Remote component registry (HTTP-based)
+- Component versioning and updates
+- Migration system for component updates
+- More component categories and types
+- Example generation for components
+
+### Extension Points
+- Component registry can be extended with new components
+- Command system can be extended with new commands
+- File system operations can be customized
+- Dependency management can be enhanced
+
+## Best Practices
+
+### Code Quality
+- Always use proper error handling
+- Validate inputs and file existence
+- Use const constructors where possible
+- Follow Dart/Flutter naming conventions
+- Write comprehensive tests
+
+### User Experience
+- Provide clear error messages
+- Use consistent command syntax
+- Support both short and long flag forms
+- Give helpful usage information
+- Validate Flutter project context
+
+### Performance
+- Use const constructors for widgets
+- Minimize file I/O operations
+- Cache component registry when possible
+- Use efficient string operations for templates
+
+## Common Patterns
+
+### Command Implementation
+```dart
+class NewCommand extends Command<int> {
+  NewCommand() {
+    argParser
+      ..addFlag('flag', abbr: 'f', help: 'Description', defaultsTo: false)
+      ..addOption('option', abbr: 'o', help: 'Description');
+  }
+
+  @override
+  Future<int> run() async {
+    final args = argResults!;
+    // Implementation
+    return 0;
+  }
+}
+```
+
+### Component Template
+```dart
+const _componentTemplate = r'''
+import 'package:flutter/material.dart';
+
+class PxComponent extends StatelessWidget {
+  // Implementation
+}
+''';
+```
+
+### Error Handling
+```dart
+try {
+  // Operation
+} catch (e) {
+  stderr.writeln('Error: $e');
+  return 1;
+}
+```
+
+This project follows Flutter/Dart best practices and implements a clean, extensible CLI architecture for managing Flutter UI components.
+

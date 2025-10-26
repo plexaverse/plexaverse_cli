@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "directories": {
+    "components": "lib/widgets",
+    "examples": "lib/examples"
+  },
+  "theme": {
+    "material3": true
+  }
+}
