@@ -374,7 +374,7 @@ class BeamsPainter extends CustomPainter {
   @override
   bool shouldRebuildSemantics(BeamsPainter oldDelegate) => false;
 }
-'''
+''';
 
 class ComponentRegistry {
   static final Map<String, ComponentDescriptor> _components = {
