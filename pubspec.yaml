@@ -1,6 +1,6 @@
 name: plexaverse_cli
 description: A powerful CLI tool for faster flutter application development. Easily add pre-built widgets and functional screens to your Flutter projects.
-version: 0.1.3
+version: 0.1.4
 homepage: https://plexaverse.com
 repository: https://github.com/plexaverse/plexaverse_cli
 issue_tracker: https://github.com/plexaverse/plexaverse_cli/issues
