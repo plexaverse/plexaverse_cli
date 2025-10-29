@@ -17,7 +17,7 @@ class InitCommand extends Command<int> {
       usageException('Not a Flutter project (missing flutter dependency in pubspec.yaml).');
     }
     final config = {
-      'version': '0.1.0',
+      'version': '0.1.4',
       'directories': {'components': 'lib/widgets', 'examples': 'lib/examples'},
       'theme': {'material3': true}
     };
