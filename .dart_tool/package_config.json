@@ -267,7 +267,7 @@
     },
     {
       "name": "watcher",
-      "rootUri": "file:///Users/asangborkar/.pub-cache/hosted/pub.dev/watcher-1.1.3",
+      "rootUri": "file:///Users/asangborkar/.pub-cache/hosted/pub.dev/watcher-1.1.4",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -314,10 +314,9 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2025-09-21T17:36:50.491964Z",
   "generator": "pub",
-  "generatorVersion": "3.6.0",
+  "generatorVersion": "3.10.0",
   "flutterRoot": "file:///Users/asangborkar/Developer/flutter",
-  "flutterVersion": "3.27.0",
+  "flutterVersion": "3.38.1",
   "pubCache": "file:///Users/asangborkar/.pub-cache"
 }
