@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
+import 'package:http/http.dart' as http;
 import 'package:yaml/yaml.dart';
 
 class VersionManager {
@@ -30,5 +32,19 @@ class VersionManager {
       // but logging to stderr might be useful in debug.
       return '0.0.0-unknown'; 
     }
+  }
+
+  static Future<String?> getLatestVersion() async {
+    try {
+      final url = Uri.parse('https://pub.dev/api/packages/plexaverse_cli');
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['latest']['version'] as String;
+      }
+    } catch (e) {
+      // Fail silently or log if needed
+    }
+    return null;
   }
 }

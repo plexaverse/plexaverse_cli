@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:args/command_runner.dart';
+import 'package:plexaverse_cli/core/version_manager.dart';
 
 class UpdateCommand extends Command<int> {
   @override
@@ -16,7 +17,26 @@ class UpdateCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    print('🔄 Updating Plexaverse CLI...');
+    print('🔄 Checking for updates...');
+    
+    final currentVersion = await VersionManager.getPackageVersion();
+    final latestVersion = await VersionManager.getLatestVersion();
+    
+    if (latestVersion != null) {
+      if (currentVersion == latestVersion) {
+        print('✅ You are already on the latest version ($currentVersion).');
+        // Optional: allow forcing update? For now, we'll just exit or maybe force reinstall if user wants?
+        // But usually update command implies "upgrade if available".
+        // Let's ask user or just proceed if they really want, but standard behavior is "up to date".
+        // However, dart pub global activate will reinstall the same version if run.
+        // Let's just tell them.
+        return 0;
+      }
+      print('🚀 New version available: $latestVersion (Current: $currentVersion)');
+      print('🔄 Updating Plexaverse CLI...');
+    } else {
+      print('⚠️  Could not fetch latest version info. Proceeding with update attempt...');
+    }
     
     // 1. Update the CLI package
     final result = await Process.run('dart', ['pub', 'global', 'activate', 'plexaverse_cli']);

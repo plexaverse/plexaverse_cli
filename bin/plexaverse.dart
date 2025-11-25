@@ -34,7 +34,15 @@ class PlexaverseCommandRunner extends CommandRunner<int> {
 Future<void> main(List<String> args) async {
   if (args.contains('--version')) {
     final version = await VersionManager.getPackageVersion();
-    print('Plexaverse CLI version $version');
+    stdout.write('Plexaverse CLI version $version');
+    
+    final latest = await VersionManager.getLatestVersion();
+    if (latest != null && latest != version) {
+      stdout.writeln(' (Latest: $latest)');
+      stdout.writeln('Update available! Run "plexaverse update" to upgrade.');
+    } else {
+      stdout.writeln(' (Latest)');
+    }
     exit(0);
   }
   final runner = PlexaverseCommandRunner();
