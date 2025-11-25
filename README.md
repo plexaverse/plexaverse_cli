@@ -14,9 +14,16 @@ A powerful command-line tool for managing Flutter UI components. Easily add pre-
 
 ### Option 1: Automatic Installation (Recommended)
 
+### macOS / Linux
 ```bash
-# Download and run the installation script (closes terminal automatically)
-curl -fsSL https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh | bash
+```
+
+### Windows
+Run the following command in PowerShell (Admin not required):
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.ps1 | iex"
+```
 
 # Or download and run manually
 wget https://raw.githubusercontent.com/plexaverse/plexaverse_cli/main/install.sh
