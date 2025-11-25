@@ -4,7 +4,6 @@ import 'package:plexaverse_cli/commands/init_command.dart';
 import 'package:plexaverse_cli/commands/add_command.dart';
 import 'package:plexaverse_cli/commands/list_command.dart';
 import 'package:plexaverse_cli/commands/update_command.dart';
-import 'package:plexaverse_cli/commands/update_command.dart';
 import 'package:plexaverse_cli/core/version_manager.dart';
 
 class PlexaverseCommandRunner extends CommandRunner<int> {
