@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:plexaverse_cli/core/component_registry.dart';
@@ -36,9 +37,27 @@ class AddCommand extends Command<int> {
       usageException('Not a Flutter project (missing flutter dependency in pubspec.yaml).');
     }
 
+    final configFile = File('plexaverse.json');
+    if (!configFile.existsSync()) {
+      usageException('Plexaverse not initialized. Run "plexaverse init" first.');
+    }
+
+    final config = jsonDecode(configFile.readAsStringSync()) as Map<String, dynamic>;
+    final directories = config['directories'] as Map<String, dynamic>?;
+    final componentsDir = directories?['components'] as String? ?? 'lib/widgets';
+
     // Write files
     for (final entry in descriptor.templates.entries) {
-      final file = File(entry.key);
+      // Replace default path with configured path
+      // Assuming keys in registry are like 'lib/widgets/foo.dart'
+      final relativePath = entry.key.replaceFirst('lib/widgets', componentsDir);
+      final file = File(relativePath);
+      
+      // Ensure directory exists
+      if (!file.parent.existsSync()) {
+        file.parent.createSync(recursive: true);
+      }
+
       FileSystem.writeFile(file, entry.value, overwrite: args['overwrite'] as bool);
       stdout.writeln('Wrote ${file.path}');
     }

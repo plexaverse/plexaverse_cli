@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:plexaverse_cli/core/project_analyzer.dart';
+import 'package:plexaverse_cli/core/version_manager.dart';
 
 class InitCommand extends Command<int> {
   @override
@@ -16,8 +17,9 @@ class InitCommand extends Command<int> {
     if (!analyzer.isFlutterProject) {
       usageException('Not a Flutter project (missing flutter dependency in pubspec.yaml).');
     }
+    final version = await VersionManager.getPackageVersion();
     final config = {
-      'version': '0.1.4',
+      'version': version,
       'directories': {'components': 'lib/widgets', 'examples': 'lib/examples'},
       'theme': {'material3': true}
     };

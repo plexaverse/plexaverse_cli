@@ -4,6 +4,8 @@ import 'package:plexaverse_cli/commands/init_command.dart';
 import 'package:plexaverse_cli/commands/add_command.dart';
 import 'package:plexaverse_cli/commands/list_command.dart';
 import 'package:plexaverse_cli/commands/update_command.dart';
+import 'package:plexaverse_cli/commands/update_command.dart';
+import 'package:plexaverse_cli/core/version_manager.dart';
 
 class PlexaverseCommandRunner extends CommandRunner<int> {
   PlexaverseCommandRunner()
@@ -30,6 +32,11 @@ class PlexaverseCommandRunner extends CommandRunner<int> {
 }
 
 Future<void> main(List<String> args) async {
+  if (args.contains('--version')) {
+    final version = await VersionManager.getPackageVersion();
+    print('Plexaverse CLI version $version');
+    exit(0);
+  }
   final runner = PlexaverseCommandRunner();
   final exitCode = await runner.run(args);
   if (exitCode != 0) exit(exitCode);
